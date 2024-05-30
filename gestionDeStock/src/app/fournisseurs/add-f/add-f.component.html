@@ -1,0 +1,120 @@
+
+                
+                    <div class="card">
+                        <div class="card-header card-header-danger row ">
+                            <div class="col-6">
+                                <h4 class="card-title mt-0"> Ajout de Fournisseur </h4>
+                            </div>
+                        </div>
+                      <div class="card-body">
+                          <form class="example-form" [formGroup]="FournisseurForm">
+                              <div class="row">
+                                  <div class="col-md-5">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput  placeholder="Fournisseur Id" disabled>
+                                      </mat-form-field>
+                                  </div>
+                                  <div class="col-md-7">
+                                      <mat-form-field class="example-full-width">
+                                        <input matInput formControlName="nameFournisseur" placeholder="Fournisseur Name">
+                                        <mat-error *ngIf="FournisseurForm.controls.nameFournisseur.hasError('required')">
+                                          Client Name is required.
+                                        </mat-error>
+                                      </mat-form-field>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput formControlName="refFournisseur" placeholder=" Ref Fournisseur">
+                                    <mat-error *ngIf="FournisseurForm.controls.refFournisseur.hasError('required')">
+                                      Ref client is required.
+                                    </mat-error>
+                                  </mat-form-field>
+                              </div>
+                                <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput formControlName="telpFournisseur" placeholder="Telephone" type="text">
+                                    <mat-error *ngIf="FournisseurForm.controls.telpFournisseur.hasError('required')">
+                                      Telephone client is required.
+                                    </mat-error>
+                                  </mat-form-field>
+                                </div>
+                               
+                                <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput formControlName="faxFournisseur" placeholder="Fax" type="text">
+                                    <mat-error *ngIf="FournisseurForm.controls.faxFournisseur.hasError('required')">
+                                      Fax client is required.
+                                    </mat-error>
+                                  </mat-form-field>
+                                </div>
+                            </div>
+                       
+                              <div class="row">
+                                <div class="col-md-8">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput formControlName="adresseFournisseur" placeholder="Address Fournisseur" type="text">
+                                    <mat-error *ngIf="FournisseurForm.controls.adresseFournisseur.hasError('required')">
+                                      Address client is required.
+                                    </mat-error>
+                                  </mat-form-field>
+                                </div>
+                                  <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                      <input matInput formControlName="villeFournisseur" placeholder="Ville" type="text">
+                                      <mat-error *ngIf="FournisseurForm.controls.villeFournisseur.hasError('required')">
+                                        Ville client is required.
+                                      </mat-error>
+                                    </mat-form-field>
+                                  </div>
+                               
+                            </div>
+                              <div class="row">
+                                  <div class="col-md-10">
+                                    <mat-form-field class="example-full-width">
+                                      <input matInput formControlName="emailFournisseur" placeholder="Email" type="text">
+                                      <mat-error *ngIf="FournisseurForm.controls.emailFournisseur.hasError('required')">
+                                        Email client is required.
+                                      </mat-error>
+                                      <mat-error *ngIf="FournisseurForm.controls.emailFournisseur.hasError('email')">
+                                        Email client not valid.
+                                      </mat-error>
+                                    </mat-form-field>
+                                  </div>
+                                </div>  
+                                <div class="row">
+                                  <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                      <input matInput formControlName="typeFournisseur" placeholder="type Fournisseur" type="text">
+                                      <mat-error *ngIf="FournisseurForm.controls.typeFournisseur.hasError('required')">
+                                        type client is required.
+                                      </mat-error>
+                                    </mat-form-field>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <mat-form-field appearance="fill">
+                                      <mat-label>mode de paiement</mat-label>
+                                      <mat-select formControlName="modepaimentFournisseur">
+                                        <mat-option value="ESPECE"> ESPECE</mat-option>
+                                        <mat-option value="CHEK">CHEK</mat-option>
+                                        <mat-option value="VERMENT">VERMENT</mat-option>
+                                        <mat-option value="CARTE BANCAIRE">CARTE BANCAIRE</mat-option>
+                                      </mat-select>
+                                      <mat-error *ngIf="FournisseurForm.controls.modepaimentFournisseur.hasError('required')">
+                                        mode paiement client is required.
+                                      </mat-error>
+                                      <mat-hint align="end" >Here's the dropdown arrow ^</mat-hint>
+                                    </mat-form-field>
+                                  </div>
+                                  
+                              </div>
+                              <button mat-raised-button (click)="submitClient()" [mat-dialog-close] class="btn btn-danger pull-right">  <span class="material-icons">
+                                add_task
+                                </span> Ajouter Fournisseur</button>
+                              <div class="clearfix"></div>
+                            
+                          </form>
+                      </div>
+                </div>
+  

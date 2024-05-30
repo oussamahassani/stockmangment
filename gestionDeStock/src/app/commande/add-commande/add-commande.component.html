@@ -1,0 +1,145 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-success row ">
+
+                        <ul class="nav nav-tabs " id="myTab" role="tablist">
+                            <li class="nav-item mr-5">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#Fournisseur"
+                                    role="tab" aria-controls="home" aria-selected="true">Ajouter commande </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#favoris" role="tab"
+                                    aria-controls="profile" aria-selected="false">Consulter Commande </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="Fournisseur" role="tabpanel"
+                            aria-labelledby="home-tab">
+                            <div class="card-body">
+
+                                <form class="example-form" [formGroup]="commandeForm">
+                                    <div class="row ">
+                                        <div class="col-md-4">
+
+                                            
+                                             
+                                                <mat-select class="form-control border bg-white" formControlName="idClient" placeholder="name Client">
+                                                    <mat-option class="text-muted pl-1" *ngFor="let client of clients" [value]="client.id">
+                                                        {{client.nameClient}}
+                                                    </mat-option>
+                                                </mat-select>
+                                                <mat-error *ngIf="submited && commandeForm.controls.idClient.hasError('required')">
+                                         Name client is required.
+                                        </mat-error>
+                                 
+
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="example-full-width ">
+                                                <input formControlName="refCommande"  class="form-control border bg-white"
+                                                    placeholder=" ref-commande ">
+                                                    <mat-error *ngIf="submited && commandeForm.controls.refCommande.hasError('required')">
+                                                        Ref client is required.
+                                                       </mat-error>
+                                            
+                                    </div>
+                                        </div>
+
+
+                                        <div class="col-md-2">
+                            
+                                                <div class="text-center"><button (click)="addNewRow()" class="badge badge-success"><i class="fa fa-plus"></i> ADD NEW</button></div>
+                                        </div>
+
+
+                                    </div>
+                                    <div formArrayName="commandeItems" class="card border-primary mb-3">
+                                        <!-- Check the correct way to iterate your form array -->
+                                        <div *ngFor="let produitRow of commandeForm.controls.commandeItems.controls; let i=index"
+                                            [formGroupName]="i">
+                                            <!-- <h4>ligne N  :{{ i + 1 }}</h4> -->
+                                            <div class="row">
+                                                <div class="form-group col-3">
+                                                    <!-- <mat-label> Name Produit</mat-label> -->
+
+                                                    <mat-select formControlName="idP" appearance="fill" placeholder="Name Produit"
+                                                        (selectionChange)="onSelectionChange($event,i)" name="userRole">
+                                                        <ngx-mat-select-search [ngModelOptions]="{standalone: true}"
+                                                            [(ngModel)]="searchCtrl" [placeholderLabel]="'Search...'"
+                                                            [noEntriesFoundLabel]="'Not found'" name="search">
+                                                        </ngx-mat-select-search>
+                                                        <mat-option
+                                                            *ngFor="let produit of produits |stringFilterBy:searchCtrl:'nameProduit'"
+                                                            [value]="produit.id">
+                                                            {{produit.nameProduit}}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </div>
+
+                                                <div class="form-group col-2">
+                                                    <!-- <mat-label>QTE</mat-label> -->
+                                                    <input type="number" formControlName="quantity" placeholder="Qte"
+                                                        (ngModelChange)="saverange($event,i)" class="form-control">
+                                                </div>
+                                                <div class="form-group col-2">
+                                                    <!-- <mat-label>Prix Unitaire </mat-label> -->
+                                                    <input formControlName="prixVente" class="form-control" placeholder="P.U"
+                                                        disabled>
+
+                                                </div>
+                                                <div class="form-group col-3">
+                                                    <!-- <mat-label>Montant</mat-label> -->
+                                                    <input formControlName="montant" class="form-control" placeholder="Montant"
+                                                        disabled>
+                                                </div>
+                                                <div class="form-group col-2">
+                                                    <button class="badge badge-danger"
+                                                        *ngIf="commandeForm.controls.commandeItems.controls.length"
+                                                        (click)="deleteRow(i)" color="warn"><i class="fa fa-trash"></i> Delete</button>
+                                                        
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="offset-6 col-3">
+
+                                            <h3 class="text-warning mt-10"> Total : {{total}}  <i class="fa fa-arrow-up"></i></h3>
+
+                                        </div>
+                                        <div class="col-3">
+                                            <button type="button" (click)="save()" class="btn btn-success"><span
+                                                    class="material-icons">
+                                                    add
+                                                </span>save Commande</button>
+
+                                        </div>
+
+                                    </div>
+                                </form>
+
+                                <!-- <p>{{commandeForm.value | json}}</p> -->
+
+                                <div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="tab-pane fade show" id="favoris" role="tabpanel" aria-labelledby="home-tab">
+                            <app-list-commande></app-list-commande>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

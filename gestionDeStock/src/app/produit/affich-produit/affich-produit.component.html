@@ -1,0 +1,47 @@
+<div class="card">
+    <div class="card-header card-header-success">
+        <h4 class="card-title ">Details Client</h4>
+      
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table [formGroup]="ProduitForm">
+                <tr>
+                    <th>  Name Produit </th>
+                    <td>  <input type="text" formControlName="nameProduit" readonly class="form-control-plaintext" > </td>
+                </tr>
+                <tr>
+                    <th>  Quantite Produit </th>
+                    <td>  <input type="text" formControlName="qteProduit" readonly class="form-control-plaintext" > </td>
+                </tr>
+                <tr>
+                    <th> Prix achat </th>
+                    <td> <input type="text" formControlName="prixDachat" readonly class="form-control-plaintext" >  </td>
+                </tr>
+                <tr>
+                    <th> prix vente </th>
+                    <td> <input type="text" formControlName="prixVente" readonly class="form-control-plaintext">  </td>
+                </tr>
+                <tr>
+                    <th> Fournisseur </th>
+                    <td> <input type="text" formControlName="idFournisseur" readonly class="form-control-plaintext" > </td>
+                </tr>
+                <tr>
+                    <th> Categorie </th>
+                    <td> <input type="text" formControlName="idCat" readonly class="form-control-plaintext" >  </td>
+                </tr>
+                <tr>
+                    <th> Pack </th>
+                    <td> <input type="text" formControlName="idPack" readonly class="form-control-plaintext">  </td>
+                    
+                </tr>
+            </table>
+            <mat-dialog-actions align="center">
+                <button class="mat-raised-button btn btn-success  pull-right" (click)="close()">Close</button>
+            </mat-dialog-actions>
+        </div>
+    </div>
+
+</div>
+
+

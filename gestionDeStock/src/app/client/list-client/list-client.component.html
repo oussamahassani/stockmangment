@@ -1,0 +1,100 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-success row ">
+                        <div class="col-6">
+                            <h4 class="card-title mt-0"> Liste de client </h4>
+                        </div>
+                        <div class="col-6">
+                          <h4 (click)="openDialog2()" class=" btn btn-success card-title mt-0 pull-right">
+                            list client favoris </h4> 
+                         </div> 
+                    </div>
+                    <div class="card-body">   
+                              <div class="row">
+                                <div class="col-6">
+                                      <mat-form-field >
+                                      <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+                                     </mat-form-field>
+                                  </div>
+                                  <div class="offset-1 col-4">
+                                    <button (click)="openDialog()" class=" btn btn-outline-danger pull-right">
+                                     <span class="material-icons"> add_circle_outline </span> ajouter client </button> 
+                                   </div> 
+        
+                              </div>
+                              <div class="table-responsive">
+                                  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="customSort($event)" >
+                                    <ng-container matColumnDef="ref-client">
+                                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Ref client </th>
+                                      <td mat-cell *matCellDef="let element"> {{element.refClient}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="name">
+                                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                                      <td mat-cell *matCellDef="let element"> {{element.nameClient}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="telephone">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> telephone client </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.telpClient}} </td>
+                                      </ng-container>
+                                  
+                                    <ng-container matColumnDef="email">
+                                      <th mat-header-cell *matHeaderCellDef mat-sort-header> adresse client </th>
+                                      <td mat-cell *matCellDef="let element"> {{element.adresseClient}} </td>
+                                    </ng-container>
+                                  
+                                    <ng-container matColumnDef="address">
+                                      <th mat-header-cell *matHeaderCellDef mat-sort-header> email </th>
+                                      <td mat-cell *matCellDef="let element"> {{element.emailClient}} </td>
+                                    </ng-container>
+                                  
+                                    <ng-container matColumnDef="details">
+                                      <th mat-header-cell *matHeaderCellDef> Details </th>
+                                      <td mat-cell *matCellDef="let element">
+                                        <button mat-icon-button color="primary" (click)="openModal(element.idClient)">
+                                            <span class="material-icons"> zoom_in</span>
+                                        </button>
+                                      </td>
+                                    </ng-container>
+                                  
+                                    <ng-container matColumnDef="update">
+                                        <th mat-header-cell *matHeaderCellDef> Update </th>
+                                        <td mat-cell *matCellDef="let element">
+                                          <button mat-icon-button color="accent" (click)="openModalUpdate(element.idClient)">
+                                            <span class="material-icons text-success">edit</span>
+                                          </button>
+                                        </td>
+                                      </ng-container>
+                                  
+                                      <ng-container matColumnDef="delete">
+                                          <th mat-header-cell *matHeaderCellDef> Delete </th>
+                                          <td mat-cell *matCellDef="let element">
+                                            <button mat-icon-button color="warn" (click)="redirectToDelete(element.idClient)">
+                                                <span class="material-icons text-secondary"> delete_sweep </span>
+                                            </button>
+                                          </td>
+                                        </ng-container>
+                                        <ng-container matColumnDef="favoris">
+                                          <th mat-header-cell *matHeaderCellDef> favoris </th>
+                                          <td mat-cell *matCellDef="let element">
+                                            <button mat-icon-button color="warn" (click)="favoris(element.idClient)">
+                                                <span class="material-icons text-danger" *ngIf="!element.favorisClient" > star_border </span>
+                                                <span class="material-icons text-danger" *ngIf="element.favorisClient"> star </span>
+                                              </button>
+                                          </td>
+                                        </ng-container>
+                                  
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                  </table>
+                                  <mat-paginator [pageSize]="4" [pageSizeOptions]="[2, 4, 6, 10, 20]">
+                                </mat-paginator>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

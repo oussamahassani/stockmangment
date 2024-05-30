@@ -1,0 +1,72 @@
+<mat-accordion class="example-headers-align" multi>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-description>
+                <span class="material-icons">
+                    add
+                </span>
+                Ajouter Categorie
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <form [formGroup]="CategorieForm">
+        <div class="row">
+            <div class="col-md-4">
+                <mat-form-field>
+                    <input matInput formControlName="refCat" placeholder="Ref Categorie" type="text">
+                    <mat-error *ngIf="CategorieForm.controls.refCat.hasError('required')">
+                        Ref Categorie is required.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field>
+                    <input matInput formControlName="nameCat" placeholder="Name Categorie" type="text">
+                    <mat-error *ngIf="CategorieForm.controls.nameCat.hasError('required')">
+                        Name Categorie is required.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+              <div><button *ngIf="showAddButton" (click)="submitCategorie()" class="btn btn-outline-primary bg-white" >AJOUTER</button></div>
+              <div><button *ngIf="!showAddButton" (click)="saveUpdate()" class="btn btn-outline-primary bg-white" >SAVE UPDATE</button></div>
+            </div>
+        </div>
+    </form>
+    </mat-expansion-panel>
+</mat-accordion>
+
+<div class="table-responsive">
+    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="customSort($event)">
+        <ng-container matColumnDef="refCat">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Ref Categorie</th>
+            <td mat-cell *matCellDef="let element"> {{element.refCat}} </td>
+        </ng-container>
+        <ng-container matColumnDef="nameCat">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name Categorie </th>
+            <td mat-cell *matCellDef="let element"> {{element.nameCat}} </td>
+        </ng-container>
+        <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef> Update </th>
+            <td mat-cell *matCellDef="let element">
+              
+                <button mat-icon-button color="warn" (click)="update(element._id)">
+                    <span class="material-icons text-success"> edit </span>
+                </button>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef> Delete </th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="warn" (click)="redirectToDelete(element._id)">
+                    <span class="material-icons text-danger"> delete_sweep </span>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSize]="4" [pageSizeOptions]="[2, 4, 6, 10, 20]"></mat-paginator>
+</div>

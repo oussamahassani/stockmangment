@@ -1,0 +1,62 @@
+<div class="card">
+    <div class="card-header card-header-primary">
+        <h4 class="card-title ">Details Fournisseur</h4>
+      
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table [formGroup]="FournisseurForm">
+                <tr>
+                    <th>  Name Fournisseur </th>
+                    <td>  <input type="text" formControlName="nameFournisseur" readonly class="form-control-plaintext" id="staticEmail2"> </td>
+                </tr>
+                <tr>
+                    <th>  Ref Fournisseur </th>
+                    <td>  <input type="text" formControlName="refFournisseur" readonly class="form-control-plaintext" id="staticEmail2"> </td>
+                </tr>
+                <tr>
+                    <th> Telephone </th>
+                    <td> <input type="text" formControlName="telpFournisseur" readonly class="form-control-plaintext" id="staticEmail2">  </td>
+                </tr>
+                <tr>
+                    <th> Fax </th>
+                    <td> <input type="text" formControlName="faxFournisseur" readonly class="form-control-plaintext" id="staticEmail2">  </td>
+                </tr>
+                <tr>
+                    <th> Adresse </th>
+                    <td> <input type="text" formControlName="adresseFournisseur" readonly class="form-control-plaintext" id="staticEmail2"> </td>
+                </tr>
+                <tr>
+                    <th> Email </th>
+                    <td> <input type="text" formControlName="emailFournisseur" readonly class="form-control-plaintext" id="staticEmail2">  </td>
+                </tr>
+                <tr>
+                    <th> Mod Paimment </th>
+                    <td> <input type="text" formControlName="modepaimentFournisseur" readonly class="form-control-plaintext" id="staticEmail2">  </td>
+                    
+                </tr>
+                <tr>
+                    <th> Ville </th>
+                    <td> <input type="text" formControlName="villeFournisseur" readonly class="form-control-plaintext" id="staticEmail2">  </td>
+                  
+                </tr>
+            
+            <tr>
+                <th> Type Client </th>
+                <td> <input type="text" formControlName="typeFournisseur" readonly class="form-control-plaintext" id="staticEmail2">  </td>
+                
+            </tr>
+           
+            </table>
+     
+
+           
+            <mat-dialog-actions align="center">
+                <button class="mat-raised-button btn btn-primary  pull-right" (click)="close()">Close</button>
+            </mat-dialog-actions>
+        </div>
+    </div>
+
+</div>
+
+

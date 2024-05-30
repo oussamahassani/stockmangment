@@ -1,0 +1,89 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card-body" id="component1"> 
+                <div class="well col-xs-10 col-sm-10  ">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <address>
+                                <strong>Client :</strong>
+                                <br>
+                                {{clients.nameClient}}
+                                <br>
+                                {{clients.adresseClient}}
+                                <br>
+        
+                                {{clients.emailClient}}
+                                <br>
+                                <abbr title="Phone">P:</abbr> (216) {{clients.telpClient}}
+                            </address>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                            <p>
+                                <em>Date: {{date | date:'medium'}}</em>
+                            </p>
+                            <p>
+                                <em>Ref COMMAND #: {{refC}}</em>
+                            </p>
+                            <div class="text-center text-primary">
+                                <h5>Bon de Commande Client </h5>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <table class="table-responsive table-hover mt-2">
+                            <thead>
+                                <tr  class="table-active">
+                                    <th>Product</th>
+                                    <th>Quantite</th>
+                                    <th class="text-center">P.U</th>
+                                    <th class="text-center">P.T</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                
+                                <tr *ngFor = "let produit of produits">
+                                    <td class="col-md-9"><em>{{produit.produit.nameProduit}}</em></td>
+                                    <td class="col-md-1" style="text-align: center">{{ produit.quantity}} </td>
+                                    <td class="col-md-1 text-center">{{produit.produit.prixVente}}</td>
+                                    <td class="col-md-1 text-center">{{produit.price}}</td>
+                                </tr>
+                                <tr>
+                                    <td>   </td>
+                                    <td>   </td>
+                                    <td class="text-right">
+                                        <p>
+                                            <strong>Tax: </strong>
+                                        </p>
+                                    </td>
+                                    <td class="text-center">
+                                        <p>
+                                            <strong>6.94%</strong>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>   </td>
+                                    <td>   </td>
+                                    <td class="text-right">
+                                        <h4><strong>Total: </strong></h4>
+                                    </td>
+                                    <td class="text-center text-danger">
+                                        <h4><strong>{{this.mont_tot}}DNT</strong></h4>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+           
+            <button class="mat-raised-button btn btn-danger  pull-right" (click)="close()">Close</button>
+                <button class="btn btn-success hidden-print pull-right" (click)="printComponent('component1')"><span class="material-icons">
+                    local_printshop
+                    </span> Print</button>
+           
+        </div>
+    </div>

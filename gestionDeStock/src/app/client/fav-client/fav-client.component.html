@@ -1,0 +1,53 @@
+
+   
+                <div class="card">
+                    <div class="card-header card-header-success row ">
+                        <div class="col-6">
+                            <h4 class="card-title mt-0"> Liste de client favoris </h4>
+                        </div>
+                        
+                    </div>
+                    <div class="card-body">   
+                              <div class="row">
+                                <div class="col-6">
+                                      <mat-form-field >
+                                      <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+                                     </mat-form-field>
+                                  </div>
+                                 
+        
+                              </div>
+                              <div class="table-responsive">
+                                  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="customSort($event)" >
+                                    <ng-container matColumnDef="ref-client">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Ref client </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.refClient}} </td>
+                                      </ng-container>
+                                   
+                                    <ng-container matColumnDef="name">
+                                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                                      <td mat-cell *matCellDef="let element"> {{element.nameClient}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="telephone">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> telephone client </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.telpClient}} </td>
+                                      </ng-container>
+                                  
+                                    <ng-container matColumnDef="email">
+                                      <th mat-header-cell *matHeaderCellDef mat-sort-header> adresse client </th>
+                                      <td mat-cell *matCellDef="let element"> {{element.adresseClient}} </td>
+                                    </ng-container>
+                                  
+                                    <ng-container matColumnDef="address">
+                                      <th mat-header-cell *matHeaderCellDef mat-sort-header> email </th>
+                                      <td mat-cell *matCellDef="let element"> {{element.emailClient}} </td>
+                                    </ng-container> 
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                  </table>
+                                  <mat-paginator [pageSize]="4" [pageSizeOptions]="[2, 4, 6, 10, 20]">
+                                </mat-paginator>
+                        </div>
+                    </div>
+                </div>
+  

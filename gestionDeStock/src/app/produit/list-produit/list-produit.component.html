@@ -1,0 +1,114 @@
+<div class="main-content">
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-md-12 ">
+        <div class="card">
+
+          <div class="card-header card-header-tabs card-header-success">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#produit" role="tab"
+                  aria-controls="home" aria-selected="true">PRODUIT</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#category" role="tab"
+                  aria-controls="profile" aria-selected="false">CATEGORY</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#pack" role="tab" aria-controls="contact"
+                  aria-selected="false">PACKS</a>
+              </li>
+            </ul>
+          </div>
+          <div class="card-body">
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="produit" role="tabpanel" aria-labelledby="home-tab">
+                <div class="row">
+                  <div class="col-6">
+                    <mat-form-field>
+                      <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+                    </mat-form-field>
+                  </div>
+                  <div class="offset-1 col-4">
+                    <button (click)="openDialog()" class=" btn btn-outline-danger pull-right">
+                      <span class="material-icons"> add_circle_outline </span> ajouter Produit </button>
+                  </div>
+                </div>
+
+                <div class="table-responsive">
+                  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="customSort($event)">
+                    <ng-container matColumnDef="ref_produit">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Ref PRODUIT</th>
+                      <td mat-cell *matCellDef="let element"> {{element.refProduit}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="name_produit">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name PRODUIT</th>
+                      <td mat-cell *matCellDef="let element"> {{element.nameProduit}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="quantite">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantite </th>
+                      <td mat-cell *matCellDef="let element"> {{element.qteProduit}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="prix_achat">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Prix d 'achat </th>
+                      <td mat-cell *matCellDef="let element"> {{element.prixDachat}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="prix_vente">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Prix de vente </th>
+                      <td mat-cell *matCellDef="let element"> {{element.prixVente}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="details">
+                      <th mat-header-cell *matHeaderCellDef> Details </th>
+                      <td mat-cell *matCellDef="let element">
+                        <button mat-icon-button color="primary" (click)="openModal(element.id)">
+                          <span class="material-icons"> zoom_in</span>
+                        </button>
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="update">
+                      <th mat-header-cell *matHeaderCellDef> Update </th>
+                      <td mat-cell *matCellDef="let element">
+                        <button mat-icon-button color="accent" (click)="openModalUpdate(element.id)">
+                          <span class="material-icons text-success">edit</span>
+                        </button>
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="delete">
+                      <th mat-header-cell *matHeaderCellDef> Delete </th>
+                      <td mat-cell *matCellDef="let element">
+                        <button mat-icon-button color="warn" (click)="redirectToDelete(element.id)">
+                          <span class="material-icons text-danger"> delete_sweep </span>
+                        </button>
+                      </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                  <mat-paginator [pageSize]="4" [pageSizeOptions]="[2, 4, 6, 10, 20]"></mat-paginator>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="category" role="tabpanel" aria-labelledby="profile-tab">
+
+                <app-categorie></app-categorie>
+
+              </div>
+              <div class="tab-pane fade" id="pack" role="tabpanel" aria-labelledby="contact-tab">
+
+                <app-pack></app-pack>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+                <div class="card">
+                    <div class="card-header card-header-success">
+                        <h4 class="card-title ">Details Client</h4>
+                      
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table [formGroup]="clientForm">
+                                <tr>
+                                    <th>  Name Client </th>
+                                    <td>  <input type="text" formControlName="nameClient" readonly class="form-control-plaintext" id="staticEmail2"> </td>
+                                </tr>
+                                <tr>
+                                    <th>  Ref Client </th>
+                                    <td>  <input type="text" formControlName="refClient" readonly class="form-control-plaintext" id="staticEmail2"> </td>
+                                </tr>
+                                <tr>
+                                    <th> Telephone </th>
+                                    <td> <input type="text" formControlName="telpClient" readonly class="form-control-plaintext" id="staticEmail2">  </td>
+                                </tr>
+                                <tr>
+                                    <th> Fax </th>
+                                    <td> <input type="text" formControlName="faxClient" readonly class="form-control-plaintext" id="staticEmail2">  </td>
+                                </tr>
+                                <tr>
+                                    <th> Adresse </th>
+                                    <td> <input type="text" formControlName="adresseClient" readonly class="form-control-plaintext" id="staticEmail2"> </td>
+                                </tr>
+                                <tr>
+                                    <th> Email </th>
+                                    <td> <input type="text" formControlName="emailClient" readonly class="form-control-plaintext" id="staticEmail2">  </td>
+                                </tr>
+                                <tr>
+                                    <th> Mod Paimment </th>
+                                    <td> <input type="text" formControlName="modepaimentClient" readonly class="form-control-plaintext" id="staticEmail2">  </td>
+                                    
+                                </tr>
+                                <tr>
+                                    <th> Ville </th>
+                                    <td> <input type="text" formControlName="villeClient" readonly class="form-control-plaintext" id="staticEmail2">  </td>
+                                  
+                                </tr>
+                            
+                            <tr>
+                                <th> Type Client </th>
+                                <td> <input type="text" formControlName="typeClient" readonly class="form-control-plaintext" id="staticEmail2">  </td>
+                                
+                            </tr>
+                           
+                            </table>
+                     
+           
+                           
+                            <mat-dialog-actions align="center">
+                                <button class="mat-raised-button btn btn-success  pull-right" (click)="close()">Close</button>
+                            </mat-dialog-actions>
+                        </div>
+                    </div>
+                
+            </div>
+     

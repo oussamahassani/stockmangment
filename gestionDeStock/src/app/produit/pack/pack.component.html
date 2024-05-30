@@ -1,0 +1,108 @@
+<mat-accordion class="example-headers-align" multi>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-description>
+                <span class="material-icons">
+                    add
+                </span>
+                Ajouter Pack
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <form [formGroup]="PackForm">
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field>
+                        <input matInput formControlName="refPack" placeholder="Ref Categorie" type="text">
+                        <mat-error *ngIf="PackForm.controls.refPack.hasError('required')">
+                            Ref Categorie is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field>
+                        <input matInput formControlName="namePack" placeholder="Name Categorie" type="text">
+                        <mat-error *ngIf="PackForm.controls.namePack.hasError('required')">
+                            Name Categorie is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+        
+                <div class="col-md-4">
+                    <mat-form-field class="example-chip-list">
+                        <mat-label> Produits</mat-label>
+                        <mat-chip-list #chipList aria-label="Produit selection">
+                            <mat-chip *ngFor="let prod of TabProduit" [selectable]="selectable" [removable]="removable"
+                                (removed)="remove(prod)">
+                                {{prod}}
+                                <span matChipRemove *ngIf="removable" class="material-icons">
+                                    clear
+                                </span>
+        
+                            </mat-chip>
+                            <input placeholder="Produit..." #fruitInput [formControl]="ProduitCtrl" [matAutocomplete]="auto"
+                                [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                (matChipInputTokenEnd)="add($event)">
+                        </mat-chip-list>
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                            <mat-option *ngFor="let TabProduit of filteredProduits | async" [value]="TabProduit">
+                                {{TabProduit.nameProduit}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+                <div><button (click)="save()" class="btn btn-outline-primary bg-white">AJOUTER</button></div>
+            </div>
+        </form>
+    </mat-expansion-panel>
+</mat-accordion>
+
+
+
+
+
+
+
+<div class="table-responsive">
+    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="customSort($event)">
+        <ng-container matColumnDef="refPack">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Ref Categorie</th>
+            <td mat-cell *matCellDef="let element"> {{element.refPack}} </td>
+        </ng-container>
+        <ng-container matColumnDef="namePack">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name Categorie </th>
+            <td mat-cell *matCellDef="let element"> {{element.namePack}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="produits">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Produit </th>
+            <td mat-cell *matCellDef="let element">
+                {{ element.produits }}
+            </td>
+        </ng-container>
+
+       
+
+        <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef> Update </th>
+            <td mat-cell *matCellDef="let element">
+
+                <button mat-icon-button color="warn">
+                    <span class="material-icons text-success"> edit </span>
+                </button>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef> Delete </th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="warn">
+                    <span class="material-icons text-danger"> delete_sweep </span>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSize]="4" [pageSizeOptions]="[2, 4, 6, 10, 20]"></mat-paginator>
+</div>

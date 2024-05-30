@@ -1,0 +1,94 @@
+<div class="card">
+  <div class="card-header card-header-danger row ">
+    <div class="col-6">
+      <h4 class="card-title mt-0"> Ajout de Produit </h4>
+    </div>
+  </div>
+  <div class="card-body">
+    <form class="example-form" [formGroup]="ProduitForm">
+      <div class="row">
+        <div class="col-md-5">
+          <mat-form-field class="example-full-width">
+            <input matInput formControlName="refProduit" placeholder=" Ref Produit">
+            <mat-error *ngIf="ProduitForm.controls.refProduit.hasError('required')">
+              Produit Name is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-7">
+          <mat-form-field class="example-full-width">
+            <input matInput formControlName="nameProduit" placeholder="Produit Name">
+            <mat-error *ngIf="ProduitForm.controls.nameProduit.hasError('required')">
+              Produit Name is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field class="example-full-width">
+            <input matInput formControlName="qteProduit" placeholder=" Quantite Produit">
+            <mat-error *ngIf="ProduitForm.controls.qteProduit.hasError('required')">
+              Produit Quantite is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field class="example-full-width">
+            <input matInput formControlName="prixDachat" placeholder="Prix D'achat" type="text">
+            <mat-error *ngIf="ProduitForm.controls.prixDachat.hasError('required')">
+              Produit Prix D'achat is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+          <mat-form-field class="example-full-width">
+            <input matInput formControlName="prixVente" placeholder="Prix de vente" type="text">
+            <mat-error *ngIf="ProduitForm.controls.prixVente.hasError('required')">
+              Produit prix de Vente is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field appearance="fill">
+            <mat-label>Fournisseur</mat-label>
+            <mat-select formControlName="idFournisseur">
+              <mat-option *ngFor="let fourni of fournis" [value]="fourni.id">
+                {{fourni.nameFournisseur}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="ProduitForm.controls.idFournisseur.hasError('required')">
+              Produit Fournisseur is required.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field appearance="fill">
+            <mat-label>Categorie</mat-label>
+            <mat-select formControlName="idCat">
+              <mat-option *ngFor="let cat of cats" [value]="cat.id">
+                {{cat.nameCat}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="ProduitForm.controls.idCat.hasError('required')">
+              Produit Fournisseur is required.
+            </mat-error>
+          </mat-form-field>
+
+
+        </div>
+      </div>
+      <button mat-raised-button (click)="submitProduit()" [mat-dialog-close] class="btn btn-danger pull-right"> <span
+        class="material-icons">
+        add_task
+      </span> Ajouter Produit</button>
+
+    </form>
+  </div>
+
+  
+</div>
