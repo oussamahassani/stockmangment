@@ -15,7 +15,7 @@ import {
   AgmCoreModule
 } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { AdminComponent } from './user/admin/admin.component';
+
 
 import { LoginComponent } from './login/login.component';
 
@@ -46,7 +46,7 @@ import { LoginComponent } from './login/login.component';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AdminComponent,
+   
     LoginComponent,
  
 

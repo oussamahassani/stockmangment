@@ -1,10 +1,11 @@
 
   <div class=" row offset-4 col-4 mt-4 ">
-    <div class="card">
+    <div class="card p-2">
+      <h3 class="text-center">Welcome to your stock mngment system</h3>
         <form [formGroup]="loginForm" class="ml-4 ">
             <br>
             <div class="input-group input-group-lg mb-3">
-                <input class="form-control" type="text"formControlName="email"  placeholder="email" >
+                <input class="form-control" type="text"formControlName="email"  placeholder="Email" >
               </div>
               <small class="text-danger" *ngIf="submitted && loginForm.get('email').hasError('required')">Email is required.</small>
               <div class="input-group input-group-lg mb-3">

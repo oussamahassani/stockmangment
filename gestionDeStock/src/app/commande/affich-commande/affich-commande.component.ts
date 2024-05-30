@@ -22,7 +22,7 @@ produits: any = [];
 
   ngOnInit(): void {
     this.CommandeServices.getCommandebyid(this.data.id).subscribe((response:any) => {
-  
+      console.log(response.client);
       this.clients=response.client;
      
       response.commandeItems.forEach(element => {

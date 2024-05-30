@@ -57,7 +57,7 @@
           <mat-form-field appearance="fill">
             <mat-label>Fournisseur</mat-label>
             <mat-select formControlName="idFournisseur">
-              <mat-option *ngFor="let fourni of fournis" [value]="fourni.id">
+              <mat-option *ngFor="let fourni of fournis" [value]="fourni._id">
                 {{fourni.nameFournisseur}}
               </mat-option>
             </mat-select>
@@ -70,7 +70,7 @@
           <mat-form-field appearance="fill">
             <mat-label>Categorie</mat-label>
             <mat-select formControlName="idCat">
-              <mat-option *ngFor="let cat of cats" [value]="cat.id">
+              <mat-option *ngFor="let cat of cats" [value]="cat._id">
                 {{cat.nameCat}}
               </mat-option>
             </mat-select>

@@ -1,0 +1,89 @@
+<div class="main-content">
+    <div class="container-fluid">
+  
+      <div class="row">
+        <div class="col-md-12 ">
+          <div class="card">
+  
+            <div class="card-header card-header-tabs card-header-success">
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#produit" role="tab"
+                    aria-controls="home" aria-selected="true">User</a>
+                </li>
+          
+          
+              </ul>
+            </div>
+            <div class="card-body">
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="produit" role="tabpanel" aria-labelledby="home-tab">
+                  <div class="row">
+                    <div class="col-6">
+                      <mat-form-field>
+                        <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+                      </mat-form-field>
+                    </div>
+                    <div class="offset-1 col-4">
+                      <a href="/dashboard/user" class=" btn btn-outline-danger pull-right">
+                        <span class="material-icons"> add_circle_outline </span> Add User </a>
+                      </div>
+                  </div>
+  
+                  <div class="table-responsive">
+                    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="customSort($event)">
+                      <ng-container matColumnDef="firstName">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> firstName</th>
+                        <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="lastName">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>lastName</th>
+                        <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="telp">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> telp </th>
+                        <td mat-cell *matCellDef="let element"> {{element.telp}} </td>
+                      </ng-container>
+  
+                      <ng-container matColumnDef="adresse">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> adresse </th>
+                        <td mat-cell *matCellDef="let element"> {{element.adresse}} </td>
+                      </ng-container>
+  
+                      <ng-container matColumnDef="email">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> email </th>
+                        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="age">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> age </th>
+                        <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+                      </ng-container>
+               
+  
+               
+  
+                      <ng-container matColumnDef="delete">
+                        <th mat-header-cell *matHeaderCellDef> Delete </th>
+                        <td mat-cell *matCellDef="let element">
+                          <button mat-icon-button color="warn" (click)="redirectToDelete(element.id)">
+                            <span class="material-icons text-danger"> delete_sweep </span>
+                          </button>
+                        </td>
+                      </ng-container>
+  
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                    <mat-paginator [pageSize]="4" [pageSizeOptions]="[2, 4, 6, 10, 20]"></mat-paginator>
+                  </div>
+                </div>
+           
+         
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

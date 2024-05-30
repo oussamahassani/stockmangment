@@ -37,6 +37,7 @@ export class NavbarComponent implements OnInit {
     }
     logOutBar(){
         this.authServices.logout();
+        localStorage.clear();
         this.router.navigateByUrl("/login");
     }
     sidebarOpen() {

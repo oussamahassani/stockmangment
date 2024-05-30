@@ -27,8 +27,17 @@ export class AuthServiceService {
       (error) => console.log(error)
     );
   }
+
+  deleteUser(id) {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set("Authorization", 'Bearer ' + token);
+  
+    return this.httpClient.delete<any>(this.baseUrl + `/users/deletUser/${id}`, { headers: headers })
+  }
   getUser() {
-    const user = this.httpClient.get(this.baseUrl + 'users/allUsers');
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set("Authorization", 'Bearer ' + token);
+    const user = this.httpClient.get(this.baseUrl + '/users/allUsers' ,  { headers: headers });
     return user;
   }
 
@@ -39,6 +48,8 @@ export class AuthServiceService {
           if (response.token) {
             console.log("ok");
             localStorage.setItem('token', response.token);
+            localStorage.setItem('useremail', response.user.username);
+            
             this.isLoginSubject.next(true);
             this.route.navigateByUrl('/dashboard');
           }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -10,7 +10,9 @@ export class ProduitServiceService {
   constructor(private httpClient: HttpClient) { }
 
   addProduit(cl) {
-    this.httpClient.post<any>(this.baseUrl + 'produits/addProduit', cl).subscribe(
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set("Authorization", 'Bearer ' + token);
+    this.httpClient.post<any>(this.baseUrl + '/produits/addProduit', cl,{ headers: headers }).subscribe(
       (msg) => {
         console.log(msg),
           location.reload()
@@ -20,19 +22,27 @@ export class ProduitServiceService {
     );
   }
   getProduit() {
-    const produit = this.httpClient.get(this.baseUrl + 'produits/allProduits');
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set("Authorization", 'Bearer ' + token);
+    const produit = this.httpClient.get(this.baseUrl + '/produits/allProduits',{ headers: headers });
     return produit;
   }
 
   deleteProduit(id) {
-   return this.httpClient.delete(this.baseUrl + 'produits/deletProduit/' + id)
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set("Authorization", 'Bearer ' + token);
+   return this.httpClient.delete(this.baseUrl + '/produits/deletProduit/' + id,{ headers: headers })
   }
   getProduitbyid(id) {
-    const user = this.httpClient.get(this.baseUrl + 'produits/getProduitById/'+ id);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set("Authorization", 'Bearer ' + token);
+    const user = this.httpClient.get(this.baseUrl + '/produits/getProduitById/'+ id,{ headers: headers });
     return user;
   }
   updateProduit(id, client) {
-    this.httpClient.put(this.baseUrl + 'produits/updateUser/' + id, client).subscribe(
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set("Authorization", 'Bearer ' + token);
+    this.httpClient.put(this.baseUrl + '/produits/updateUser/' + id, client,{ headers: headers }).subscribe(
       (msg) => {
      
       },
@@ -41,35 +51,50 @@ export class ProduitServiceService {
   }
   /******************************************** */
   addCategorie(cat) {
-   return this.httpClient.post<any>(this.baseUrl + 'categorie/addCategorie', cat)
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set("Authorization", 'Bearer ' + token);
+   return this.httpClient.post<any>(this.baseUrl + '/categorie/addCategorie', cat,{ headers: headers })
   }
   getCategorie() {
-    const cat = this.httpClient.get(this.baseUrl + 'categorie/allCategories');
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set("Authorization", 'Bearer ' + token);
+    const cat = this.httpClient.get(this.baseUrl + '/categorie/allCategories',{ headers: headers });
     return cat;
   }
   updateCategorie(id, cat) {
-  return  this.httpClient.put(this.baseUrl + 'categorie/updateCategorie/' + id, cat)
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set("Authorization", 'Bearer ' + token);
+  return  this.httpClient.put(this.baseUrl + '/categorie/updateCategorie/' + id, cat , { headers: headers })
   }
   getCatbyid(id) {
-    const cat = this.httpClient.get(this.baseUrl + 'categorie/getCategorieById/' + id);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set("Authorization", 'Bearer ' + token);
+    const cat = this.httpClient.get(this.baseUrl + '/categorie/getCategorieById/' + id , { headers: headers });
     return cat;
   }
   deleteCat(id) {
-    return this.httpClient.delete(this.baseUrl + 'categorie/deletCategorie/' + id)
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set("Authorization", 'Bearer ' + token);
+    return this.httpClient.delete(this.baseUrl + '/categorie/deletCategorie/' + id , { headers: headers })
   }
   /******************************************** */
   addPack(cat) {
     console.log(cat);
-    
-  return  this.httpClient.post<any>(this.baseUrl + 'packs/addPack', cat)
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set("Authorization", 'Bearer ' + token);
+  return  this.httpClient.post<any>(this.baseUrl + '/packs/addPack', cat , { headers: headers })
 
   }
   getPack() {
-    const cat = this.httpClient.get(this.baseUrl + 'packs/allPack');
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set("Authorization", 'Bearer ' + token);
+    const cat = this.httpClient.get(this.baseUrl + '/packs/allPacks',{ headers: headers });
     return cat;
   }
   updatePack(id, cat) {
-    this.httpClient.put(this.baseUrl + 'categorie/updateCategorie/' + id, cat).subscribe(
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set("Authorization", 'Bearer ' + token);
+    this.httpClient.put(this.baseUrl + '/categorie/updateCategorie/' + id, cat,{ headers: headers }).subscribe(
       (msg) => {
         console.log(msg),
         location.reload()
@@ -78,11 +103,15 @@ export class ProduitServiceService {
     );
   }
   getPackbyid(id) {
-    const cat = this.httpClient.get(this.baseUrl + 'categorie/getCatById/' + id);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set("Authorization", 'Bearer ' + token);
+    const cat = this.httpClient.get(this.baseUrl + '/categorie/getCatById/' + id,{ headers: headers });
     return cat;
   }
   deletePack(id) {
-    this.httpClient.delete(this.baseUrl + 'categorie/deletCat/' + id).subscribe(
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set("Authorization", 'Bearer ' + token);
+    this.httpClient.delete(this.baseUrl + '/categorie/deletCat/' + id,{ headers: headers }).subscribe(
       (msg) => {
         console.log(msg),
           location.reload()

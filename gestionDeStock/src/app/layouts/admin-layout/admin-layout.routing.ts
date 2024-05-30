@@ -5,6 +5,7 @@ import { UserProfileComponent } from '../../user-profile/user-profile.component'
 
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { AddUserComponent } from 'app/user/add-user/add-user.component';
+import { AdminComponent } from 'app/user/admin/admin.component';
 import { DashboardComponent } from 'app/dashboard/dashboard.component';
 
 import { ListFComponent } from 'app/fournisseurs/list-f/list-f.component';
@@ -19,8 +20,6 @@ import { AuthServiceService } from 'app/service/auth-service.service';
 import { AuthGuard } from 'app/auth.guard';
 import { AffichFactureComponent } from 'app/facture/affich-facture/affich-facture.component';
 import { ListFactureComponent } from 'app/facture/list-facture/list-facture.component';
-
-
 export const AdminLayoutRoutes: Routes = [
     // {
     //   path: '',
@@ -33,37 +32,8 @@ export const AdminLayoutRoutes: Routes = [
     //   path: 'userprofile',
     //   component: UserProfileComponent
     // }]
-    // }, {
-    //   path: '',
-    //   children: [ {
-    //     path: 'icons',
-    //     component: IconsComponent
-    //     }]
-    // }, {
-    //     path: '',
-    //     children: [ {
-    //         path: 'notifications',
-    //         component: NotificationsComponent
-    //     }]
-    // }, {
-    //     path: '',
-    //     children: [ {
-    //         path: 'maps',
-    //         component: MapsComponent
-    //     }]
-    // }, {
-    //     path: '',
-    //     children: [ {
-    //         path: 'typography',
-    //         component: TypographyComponent
-    //     }]
-    // }, {
-    //     path: '',
-    //     children: [ {
-    //         path: 'upgrade',
-    //         component: UpgradeComponent
-    //     }]
-    // }
+    // }, 
+    
   
      { path: 'user-profile',   component: UserProfileComponent },
     { path: 'dashboard',      component: DashboardComponent },
@@ -88,7 +58,8 @@ export const AdminLayoutRoutes: Routes = [
     {
        path: 'user', 
      component: AddUserComponent,
-    //  canActivateChild: [AuthGuard]
+    
      },
+     {path:"listUser", component:AdminComponent}
     
 ];

@@ -46,7 +46,7 @@ import { AffichCommandeComponent } from 'app/commande/affich-commande/affich-com
 import { AddFactureComponent } from 'app/facture/add-facture/add-facture.component';
 import { ListFactureComponent } from 'app/facture/list-facture/list-facture.component';
 import { AffichFactureComponent } from 'app/facture/affich-facture/affich-facture.component';
-
+import { AdminComponent } from 'app/user/admin/admin.component';
 
 @NgModule({
   imports: [
@@ -99,6 +99,7 @@ import { AffichFactureComponent } from 'app/facture/affich-facture/affich-factur
     AddFactureComponent,
     ListFactureComponent,
     AffichFactureComponent,
+    AdminComponent,
 
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
