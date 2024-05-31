@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 30 mai 2024 à 16:49
+-- Généré le : ven. 31 mai 2024 à 15:16
 -- Version du serveur : 10.6.0-MariaDB
 -- Version de PHP : 7.4.26
 
@@ -35,6 +35,15 @@ CREATE TABLE IF NOT EXISTS `categories` (
   PRIMARY KEY (`_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Déchargement des données de la table `categories`
+--
+
+INSERT INTO `categories` (`_id`, `name_cat`, `ref_cat`) VALUES
+(14, ' Batteries', '101'),
+(15, 'Glass', '102'),
+(16, 'Airbags', '103');
+
 -- --------------------------------------------------------
 
 --
@@ -57,6 +66,14 @@ CREATE TABLE IF NOT EXISTS `clients` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Déchargement des données de la table `clients`
+--
+
+INSERT INTO `clients` (`id`, `adresse_client`, `email_client`, `favoris_client`, `fax_client`, `modepaiment_client`, `name_client`, `ref_client`, `telp_client`, `type_client`, `ville_client`) VALUES
+(18, 'sousse', 'mohmed@gmail.com', b'1', '20000000', 'CHEK', 'mohamed', '101', '20000000', 'b2b', 'TUNIS'),
+(19, 'tuniq', 'salah@gmail.fr', b'0', '2011', 'CHEK', 'salah', '1044', '200111', 'b2c', 'tunis');
+
 -- --------------------------------------------------------
 
 --
@@ -75,6 +92,14 @@ CREATE TABLE IF NOT EXISTS `commandes` (
   KEY `FKoib3exi3ry2spqi19i9qk4ey1` (`client_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Déchargement des données de la table `commandes`
+--
+
+INSERT INTO `commandes` (`id`, `date_commande`, `montant_total`, `ref_commande`, `valide`, `client_id`) VALUES
+(20, '2024-05-31 10:31:05', 45, '1011', b'1', 19),
+(21, '2024-05-31 10:32:06', 135, '101010', b'0', 18);
+
 -- --------------------------------------------------------
 
 --
@@ -92,7 +117,15 @@ CREATE TABLE IF NOT EXISTS `commande_items` (
   PRIMARY KEY (`id`),
   KEY `FK41s8mamopvioe9srxqockm08h` (`commande_id`),
   KEY `FK5f5yq5l9mgt6o6j7lnbffjwm8` (`produit_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `commande_items`
+--
+
+INSERT INTO `commande_items` (`id`, `idp`, `price`, `quantity`, `commande_id`, `produit_id`) VALUES
+(1, NULL, 45, 3, 20, 17),
+(2, NULL, 135, 9, 21, 17);
 
 -- --------------------------------------------------------
 
@@ -139,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `hibernate_sequence` (
 --
 
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(14);
+(24);
 
 -- --------------------------------------------------------
 
@@ -174,19 +207,12 @@ CREATE TABLE IF NOT EXISTS `produits` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Structure de la table `produits_produits`
+-- Déchargement des données de la table `produits`
 --
 
-DROP TABLE IF EXISTS `produits_produits`;
-CREATE TABLE IF NOT EXISTS `produits_produits` (
-  `produit_id` bigint(20) NOT NULL,
-  `produits_id` bigint(20) NOT NULL,
-  UNIQUE KEY `UK_d08jb2rofuelgyg3ew8jr4elo` (`produits_id`),
-  KEY `FK20opnpr8nity616b82bp0q6s2` (`produit_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+INSERT INTO `produits` (`id`, `id_cat`, `id_fournisseur`, `name_produit`, `prix_dachat`, `prix_vente`, `qte_produit`, `ref_produit`) VALUES
+(17, '15', '7', 'glass1', 10, 15, 7, '101baz');
 
 -- --------------------------------------------------------
 
@@ -208,8 +234,9 @@ CREATE TABLE IF NOT EXISTS `roles` (
 INSERT INTO `roles` (`id`, `name`) VALUES
 (1, 'SUPER_ADMIN'),
 (2, 'ADMIN'),
-(3, 'USER'),
-(4, 'GUEST');
+(3, 'ACHETEUR'),
+(4, 'SURVEILLENT'),
+(5, 'GSTOCK');
 
 -- --------------------------------------------------------
 
@@ -230,8 +257,10 @@ CREATE TABLE IF NOT EXISTS `roles_users` (
 --
 
 INSERT INTO `roles_users` (`user_id`, `role_id`) VALUES
-(6, 2),
-(13, 4);
+(6, 1),
+(13, 4),
+(22, 5),
+(23, 4);
 
 -- --------------------------------------------------------
 
@@ -248,7 +277,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `telp` bigint(20) DEFAULT NULL,
+  `telp` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -257,8 +286,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `adresse`, `age`, `email`, `first_name`, `last_name`, `password`, `telp`) VALUES
-(13, NULL, 0, 'xxs@gmail.com', 'xxs', 'xs', '$2a$10$vNmTcyE4KkbxNOZKTanE4OS8n8PcSYM.q/9GyzrGLGEtMggxZLY4.', 0),
-(6, NULL, 0, 'admin@gmail.com', 'oussama', 'oussama', '$2a$10$0pvGTeXF5SjuHlfYPjxfaOPfbJURff.Ucfk3hVv1hQ/5mlz0PAYay', 0);
+(13, NULL, 0, 'xxs@gmail.com', 'xxs', 'xs', '$2a$10$vNmTcyE4KkbxNOZKTanE4OS8n8PcSYM.q/9GyzrGLGEtMggxZLY4.', '0'),
+(6, NULL, 0, 'admin@gmail.com', 'oussama', 'oussama', '$2a$10$0pvGTeXF5SjuHlfYPjxfaOPfbJURff.Ucfk3hVv1hQ/5mlz0PAYay', '0'),
+(22, NULL, 0, 'stock@gmail.com', 'gestion', 'oussama', '$2a$10$laXo1TpKExwPLQCt6ZcJze0XbCV6Q81/nrYVmM.xaadRgh1Jg6tYu', '0'),
+(23, NULL, 0, 'test@gmail.com', 'test', 'test', '$2a$10$bMrepZ/MbaE7jqOR73CsZOyCJG5z5MXydV.Qg/00pxy9wUJGtdHT2', '0');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
