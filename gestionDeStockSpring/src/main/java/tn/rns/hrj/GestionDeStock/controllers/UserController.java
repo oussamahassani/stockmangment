@@ -13,10 +13,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/users")
-//@ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
 @CrossOrigin(origins = "*", maxAge = 3600)
 
 public class UserController {
@@ -29,7 +29,12 @@ public class UserController {
         String message = userService.addUser(registerRequest);
         return ResponseEntity.ok().body(new MessageResponse(message));
     }
-
+    @GetMapping("/dashbord")
+    @ResponseBody
+    public ResponseEntity<?> detailDashbord() {
+    	Map  message = userService.detailDashbord();
+        return ResponseEntity.ok().body(message);
+    }
 
     @GetMapping("/allUsers")
     @ResponseBody

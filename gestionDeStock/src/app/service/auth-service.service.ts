@@ -19,7 +19,7 @@ export class AuthServiceService {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set("Authorization", 'Bearer ' + token);
     // this.httpClient.post<any>(this.baseUrl+'users/addUser',user,{ headers: headers }).subscribe(
-    this.httpClient.post<any>(this.baseUrl + '/users/addUser', user, { headers: headers }).subscribe(
+    this.httpClient.post<any>('http://localhost:9000/users/addUser', user, { headers: headers }).subscribe(
       (msg) => {
         console.log(msg),
           location.reload()
@@ -27,17 +27,22 @@ export class AuthServiceService {
       (error) => console.log(error)
     );
   }
+  dashbord() {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set("Authorization", 'Bearer ' + token);
 
+    return this.httpClient.get<any>(this.baseUrl + `/users/dashbord`, { headers: headers })
+  }
   deleteUser(id) {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set("Authorization", 'Bearer ' + token);
-  
+
     return this.httpClient.delete<any>(this.baseUrl + `/users/deletUser/${id}`, { headers: headers })
   }
   getUser() {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set("Authorization", 'Bearer ' + token);
-    const user = this.httpClient.get(this.baseUrl + '/users/allUsers' ,  { headers: headers });
+    const user = this.httpClient.get(this.baseUrl + '/users/allUsers', { headers: headers });
     return user;
   }
 
@@ -47,11 +52,20 @@ export class AuthServiceService {
         try {
           if (response.token) {
             console.log("ok");
+            let role = response.user.authorities[0].authority
             localStorage.setItem('token', response.token);
             localStorage.setItem('useremail', response.user.username);
-            
+            localStorage.setItem('role', role)
             this.isLoginSubject.next(true);
-            this.route.navigateByUrl('/dashboard');
+            if (role == "ADMIN" || role == "SUPER_ADMIN") {
+              this.route.navigateByUrl('/dashboard');
+            }
+            else if (role == "GSTOCK" || role == "SURVEILLENT") {
+              this.route.navigateByUrl('/commande');
+            }
+            else {
+              this.route.navigateByUrl('/produit');
+            }
           }
         } catch (err) {
           console.log("err", err);

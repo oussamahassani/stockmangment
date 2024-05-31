@@ -32,5 +32,6 @@ public class RegisterRequest {
     @Min(18)
     private int age;
 
+    private String telp;
     private Set<String> roles;
 }

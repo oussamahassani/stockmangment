@@ -27,7 +27,7 @@ public class User implements Serializable {
     private String lastName;
     @NonNull
     @Column(name = "telp")
-    private long telp;
+    private String telp;
     @NonNull
     @Column(name = "adresse")
     private String adresse;

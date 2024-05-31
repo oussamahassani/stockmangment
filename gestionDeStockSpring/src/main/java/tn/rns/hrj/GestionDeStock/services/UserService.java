@@ -1,11 +1,19 @@
 package tn.rns.hrj.GestionDeStock.services;
 
+
 import tn.rns.hrj.GestionDeStock.exceptions.EmailAlreadyUsedException;
 import tn.rns.hrj.GestionDeStock.exceptions.ResourceNotFoundException;
+import tn.rns.hrj.GestionDeStock.models.Categorie;
+import tn.rns.hrj.GestionDeStock.models.Commande;
 import tn.rns.hrj.GestionDeStock.models.ERole;
+import tn.rns.hrj.GestionDeStock.models.Fournisseur;
 import tn.rns.hrj.GestionDeStock.models.Role;
 import tn.rns.hrj.GestionDeStock.models.User;
 import tn.rns.hrj.GestionDeStock.payload.requests.RegisterRequest;
+import tn.rns.hrj.GestionDeStock.repositories.CategorieRepository;
+import tn.rns.hrj.GestionDeStock.repositories.CommandeRepository;
+import tn.rns.hrj.GestionDeStock.repositories.FournisseurRepository;
+import tn.rns.hrj.GestionDeStock.repositories.ProduitRepository;
 import tn.rns.hrj.GestionDeStock.repositories.RoleRepository;
 import tn.rns.hrj.GestionDeStock.repositories.UserRepository;
 
@@ -13,12 +21,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-
+import java.util.Map;
 @Service
 public class UserService {
     @Autowired
@@ -30,6 +38,17 @@ public class UserService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Autowired
+    ProduitRepository produitRepository;
+    
+    @Autowired
+    CommandeRepository commandeRepository ;
+    
+    @Autowired
+    FournisseurRepository fournisseurRepository ;
+    
+    @Autowired
+    CategorieRepository categorieRepository ;
     public String addUser(RegisterRequest registerRequest) {
 
         // test if email already used
@@ -42,7 +61,7 @@ public class UserService {
         user.setLastName(registerRequest.getLastName());
         user.setEmail(registerRequest.getEmail());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
-
+        user.setTelp(registerRequest.getTelp());
         // Traitement des Roles
         Set<String> registerRequestRoles = registerRequest.getRoles();
         Set<Role> roles = new HashSet<>();
@@ -66,11 +85,23 @@ public class UserService {
                                 .orElseThrow(() -> new ResourceNotFoundException("Error: Role is not found."));
                         roles.add(adminRole);
                         break;
-                    case "user":
-                        Role userRole = this.roleRepository.findByName(ERole.USER)
+                    case "SURVEILLENT":
+                        Role userRole = this.roleRepository.findByName(ERole.SURVEILLENT)
                                 .orElseThrow(() -> new ResourceNotFoundException("Error: Role is not found."));
                         roles.add(userRole);
                         break;
+                    case "ACHETEUR":
+                        Role ACHETEURRole = this.roleRepository.findByName(ERole.ACHETEUR)
+                                .orElseThrow(() -> new ResourceNotFoundException("Error: Role is not found."));
+                        roles.add(ACHETEURRole);
+                        break; 
+                    case "GSTOCK":
+                        Role GSTOCKRole = this.roleRepository.findByName(ERole.GSTOCK)
+                                .orElseThrow(() -> new ResourceNotFoundException("Error: Role is not found."));
+                        roles.add(GSTOCKRole);
+                        break;  
+                        
+                        
                     default:
                         Role guestRole = this.roleRepository.findByName(ERole.GUEST)
                                 .orElseThrow(() -> new ResourceNotFoundException("Error: Role is not found."));
@@ -148,5 +179,28 @@ public class UserService {
         }
         return user;
     }
+
+
+	public Map detailDashbord() {
+		// TODO Auto-generated method stub
+		long countUser = userRepository.count();
+		long countFournisseur = fournisseurRepository.count();
+		long countProduit = produitRepository.count();
+		long countCommande = commandeRepository.count();
+		 List<Commande> lastCommande = commandeRepository.findTop5ByOrderByIdDesc();
+		 List<Fournisseur> lastfournisseur = fournisseurRepository.findTop5();
+		 List<Categorie> lastcategry = categorieRepository.findTop5();
+		 
+		  Map<String, Object> hm 
+          = new HashMap<String, Object>() ;
+		  hm.put("countUser", countUser);
+		  hm.put("countFournisseur", countFournisseur);
+		  hm.put("countProduit", countProduit);
+		  hm.put("countCommande", countCommande);
+		  hm.put("lastCommande", lastCommande);
+		  hm.put("lastfournisseur", lastfournisseur);
+		  hm.put("lastcategry", lastcategry);
+		return hm;
+	}
 
 }

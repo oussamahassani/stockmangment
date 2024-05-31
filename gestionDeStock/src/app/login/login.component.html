@@ -1,20 +1,26 @@
+<div class=" row offset-1 col-10 mt-4 ">
+  <div class="col-5 card p-2 ">
+    <img src="../../assets/img/stockimage.jpg" alt="stockMangement" width="500px" height="350px" />
 
-  <div class=" row offset-4 col-4 mt-4 ">
-    <div class="card p-2">
-      <h3 class="text-center">Welcome to your stock mngment system</h3>
-        <form [formGroup]="loginForm" class="ml-4 ">
-            <br>
-            <div class="input-group input-group-lg mb-3">
-                <input class="form-control" type="text"formControlName="email"  placeholder="Email" >
-              </div>
-              <small class="text-danger" *ngIf="submitted && loginForm.get('email').hasError('required')">Email is required.</small>
-              <div class="input-group input-group-lg mb-3">
-                <input  autocomplete="on" type="password" class="form-control" formControlName="password" placeholder="Mot de passe" >
-              </div>
-              <small class="text-danger" *ngIf="submitted && loginForm.get('password').hasError('required')">Password is required.</small>
-             <br>
-              <button (click)="submitForm()" class="btn btn-danger pull-right" type="button" >Connecter</button>
-              <br>
-        </form>
-    </div>
-    </div>
+  </div>
+  <div class="card p-2 col-5">
+    <h3 class="text-center">Welcome to your stock mangment system</h3>
+    <form [formGroup]="loginForm" class="ml-4 ">
+      <br>
+      <div class="input-group input-group-lg mb-3">
+        <input class="form-control" type="text" formControlName="email" placeholder="Email">
+      </div>
+      <small class="text-danger" *ngIf="submitted && loginForm.get('email').hasError('required')">Email is
+        required.</small>
+      <div class="input-group input-group-lg mb-3">
+        <input autocomplete="on" type="password" class="form-control" formControlName="password"
+          placeholder="Mot de passe">
+      </div>
+      <small class="text-danger" *ngIf="submitted && loginForm.get('password').hasError('required')">Password is
+        required.</small>
+      <br>
+      <button (click)="submitForm()" class="btn btn-danger pull-right" type="button">Connecter</button>
+      <br>
+    </form>
+  </div>
+</div>

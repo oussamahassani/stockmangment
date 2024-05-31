@@ -93,11 +93,21 @@ public class AuthService {
                                 .orElseThrow(() -> new ResourceNotFoundException("Error: Role is not found."));
                         roles.add(adminRole);
                         break;
-                    case "user":
-                        Role userRole = this.roleRepository.findByName(ERole.USER)
+                    case "SURVEILLENT":
+                        Role userRole = this.roleRepository.findByName(ERole.SURVEILLENT)
                                 .orElseThrow(() -> new ResourceNotFoundException("Error: Role is not found."));
                         roles.add(userRole);
                         break;
+                    case "ACHETEUR":
+                        Role ACHETEURRole = this.roleRepository.findByName(ERole.ACHETEUR)
+                                .orElseThrow(() -> new ResourceNotFoundException("Error: Role is not found."));
+                        roles.add(ACHETEURRole);
+                        break; 
+                    case "GSTOCK":
+                        Role GSTOCKRole = this.roleRepository.findByName(ERole.GSTOCK)
+                                .orElseThrow(() -> new ResourceNotFoundException("Error: Role is not found."));
+                        roles.add(GSTOCKRole);
+                        break;  
                     default:
                         Role guestRole = this.roleRepository.findByName(ERole.GUEST)
                                 .orElseThrow(() -> new ResourceNotFoundException("Error: Role is not found."));
